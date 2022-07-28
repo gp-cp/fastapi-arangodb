@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "fastapi-arangodb"
+version = "0.1.0"
+description = "Trying fastapi with arangodb"
+authors = ["Christopher Pieper <c.pieper@going-public.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.79.0"
+hypercorn = "^0.13.2"
+python-arango = "^7.4.1"
+loguru = "^0.6.0"
+orjson = "^3.7.8"
+nanoid = "^2.0.0"
+pydantic = {extras = ["email"], version = "^1.9.1"}
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
