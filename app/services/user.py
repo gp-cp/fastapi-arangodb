@@ -9,7 +9,5 @@ class UserService:
         self.repo = repo
 
     def create(self, user: User) -> UserInDB:
-        
-
         new_user = self.repo.insert(user.dict(by_alias=True))
         return UserInDB(**new_user)
