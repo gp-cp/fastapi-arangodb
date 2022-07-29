@@ -31,7 +31,7 @@ async def create_user(user: UserModel, user_service: UserService = Depends()):
         raise HTTPException(err.http_code, {"message": err.message})
     return result
 
-@router.put("}", response_model=User, response_model_by_alias=True)
+@router.put("", response_model=User, response_model_by_alias=True)
 async def edit_user(user: User, user_service: UserService = Depends()):
     result, err = user_service.update(user)
     if err:
