@@ -7,7 +7,7 @@ from ..services.user import UserService
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
-@router.get("/{id}", response_model=Union[User, Dict], response_model_by_alias=True)
+@router.get("/{key}", response_model=Union[User, Dict], response_model_by_alias=True)
 async def get_user(
     key: str,
     user_service: UserService = Depends()
