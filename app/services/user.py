@@ -2,7 +2,7 @@ from arango.exceptions import DocumentUpdateError, DocumentInsertError
 from typing import List, Tuple, Union
 from fastapi import Depends
 
-from ..config.exceptions import DocumentNotFoundError
+from ..common.exceptions import DocumentNotFoundError
 from ..models.user import User, UserModel, UserWithCredentials
 from ..repository.user import UserRepo
 

@@ -1,6 +1,6 @@
 from typing import Dict, List
-from ..config.database import db
-from ..config.exceptions import DocumentNotFoundError
+from ..common.database import db
+from ..common.exceptions import DocumentNotFoundError
 
 
 class BaseRepo:

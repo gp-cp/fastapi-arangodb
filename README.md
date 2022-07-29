@@ -15,5 +15,5 @@ docker-compose up -d
 
 ## Start the app
 ```
-hypercorn app.main:server
+uvicorn app.main:server
 ```

@@ -3,7 +3,7 @@ from arango.database import StandardDatabase
 from loguru import logger
 
 
-from .config import settings
+from .settings import settings
 from orjson import dumps, loads
 
 # Initialize the ArangoDB client.

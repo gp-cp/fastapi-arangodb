@@ -5,7 +5,7 @@ import sys
 from loguru import logger
 
 from .logging import InterceptHandler
-from .config import settings
+from .settings import settings
 
 
 LOGGING_LEVEL = log.DEBUG if settings.debug_mode else log.INFO
