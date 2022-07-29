@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from ..config.database import db
 from ..config.exceptions import DocumentNotFoundError
 
@@ -7,6 +7,10 @@ class BaseRepo:
     def __init__(self, *, collection: str):
         self.db = db.client
         self.collection = collection
+
+    def get_all(self) -> List[Dict]:
+        col = self.db.collection(self.collection)
+        return col.all()
 
     def find_by_key(self, key: str) -> Dict:
         col = self.db.collection(self.collection)
@@ -17,4 +21,8 @@ class BaseRepo:
 
     def insert(self, document: Dict) -> Dict:
         result = self.db.insert_document(self.collection, document, return_new=True)
+        return result["new"]
+
+    def update(self, document: Dict) -> Dict:
+        result = self.db.update_document(document, check_rev=True, return_new=True, sync=True)
         return result["new"]
