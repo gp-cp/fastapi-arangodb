@@ -1,9 +1,24 @@
 version: '3.1'
 
 services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ARANGO_HOST=arango
+    networks:
+      - backend
+
   arango:
     image: arangodb
     environment:
       - ARANGO_ROOT_PASSWORD="MY_SUPER_HARD_PW"
     ports:
       - 8529:8529
+    networks:
+      - backend
+
+
+networks:
+  backend:
