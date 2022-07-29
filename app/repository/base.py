@@ -1,4 +1,5 @@
 from typing import Dict, List
+from xmlrpc.client import Boolean
 from ..common.database import db
 from ..common.exceptions import DocumentNotFoundError
 
@@ -26,3 +27,9 @@ class BaseRepo:
     def update(self, document: Dict) -> Dict:
         result = self.db.update_document(document, check_rev=True, return_new=True, sync=True)
         return result["new"]
+
+    def delete(self, key: str):
+        col = self.db.collection(self.collection)
+        result = col.delete(key, sync=True, silent=True, ignore_missing=True)
+        if not result:
+           raise DocumentNotFoundError(key) 

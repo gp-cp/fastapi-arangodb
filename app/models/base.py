@@ -1,10 +1,7 @@
-from pydantic import UUID5, BaseModel, Field
-from uuid import uuid5, NAMESPACE_DNS
-from ..common.settings import settings
+from pydantic import UUID4, BaseModel, Field
+from uuid import uuid4
 
-def generate_id():
-    return uuid5(NAMESPACE_DNS, settings.app_name)
 
 class Base(BaseModel):
     id: str = Field(None,  alias="_id")
-    key: UUID5 = Field(default_factory=generate_id, alias="_key")
+    key: UUID4 = Field(default_factory=uuid4, alias="_key")

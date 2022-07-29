@@ -1,6 +1,8 @@
+from uuid import uuid5
 from arango.exceptions import DocumentUpdateError, DocumentInsertError
 from typing import List, Tuple, Union
 from fastapi import Depends
+from pydantic import UUID4, UUID5
 
 from ..common.exceptions import DocumentNotFoundError
 from ..models.user import User, UserModel, UserWithCredentials
@@ -14,9 +16,9 @@ class UserService:
         users = self.repo.get_all()
         return [UserWithCredentials(**u) for u in users]
 
-    def get_by_key(self, key: str) -> Tuple[UserWithCredentials, DocumentNotFoundError]:
+    def get_by_key(self, key: UUID4) -> Tuple[UserWithCredentials, DocumentNotFoundError]:
         try:
-            user = self.repo.find_by_key(key)
+            user = self.repo.find_by_key(str(key))
         except DocumentNotFoundError as e:
             return None, e
         return UserWithCredentials(**user), None
@@ -35,3 +37,10 @@ class UserService:
         except DocumentUpdateError as e:
             return None, e
         return UserWithCredentials(**updated_user), None
+
+    def delete(self, key: UUID4) -> DocumentNotFoundError:
+        try:
+            self.repo.delete(str(key))
+        except DocumentNotFoundError as e:
+            return e
+        return None
