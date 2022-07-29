@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Trying fastapi with arangodb"
 authors = ["Christopher Pieper <c.pieper@going-public.edu>"]
 
+packages = [
+    {include="app"}
+]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.79.0"
