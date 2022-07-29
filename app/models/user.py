@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
 from .base import Base
 
 class RankType(str, Enum):
@@ -7,7 +7,7 @@ class RankType(str, Enum):
     ADM = "admin"
 
 
-class User(Base):
+class UserModel(BaseModel):
     user_name: str
     full_name: str
     email: EmailStr
@@ -15,5 +15,9 @@ class User(Base):
     activated: bool = True
 
 
-class UserInDB(User):
+class User(Base, UserModel):
+    pass
+
+
+class UserWithCredentials(User):
     password: str = ""
