@@ -9,10 +9,10 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/{id}", response_model=Union[User, Dict], response_model_by_alias=True)
 async def get_user(
-    id: str,
+    key: str,
     user_service: UserService = Depends()
 ):  
-    user, err = user_service.get_by_key(id)
+    user, err = user_service.get_by_key(key)
     if err:
         raise HTTPException(404, {"message": err.message})
     return user
