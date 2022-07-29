@@ -43,4 +43,5 @@ RUN chown -R app:app /home/app
 
 USER app
 
+# TODO: Use gunicorn
 CMD uvicorn app.main:server 
