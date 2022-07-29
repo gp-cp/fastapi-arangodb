@@ -43,4 +43,4 @@ RUN chown -R app:app /home/app
 
 USER app
 
-CMD hypercorn app.main:server
+CMD uvicorn app.main:server 

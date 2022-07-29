@@ -1,5 +1,6 @@
 from arango import ArangoClient
 from arango.database import StandardDatabase
+from loguru import logger
 
 
 from .config import settings

@@ -9,5 +9,7 @@ class Settings(BaseSettings):
     arango_user: str = Field(env="ARANGO_USER", default="arango")
     arango_db: str = Field(env="ARANGO_DB", default="api_db")
 
+    debug_mode: bool = Field(env="DEBUG_MODE", default=False)
+
 
 settings = Settings()
