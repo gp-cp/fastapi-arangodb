@@ -16,6 +16,7 @@ loguru = "^0.6.0"
 orjson = "^3.7.8"
 pydantic = {extras = ["email"], version = "^1.9.1"}
 uvicorn = "^0.18.2"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
