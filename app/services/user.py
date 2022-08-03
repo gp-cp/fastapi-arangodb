@@ -1,5 +1,5 @@
 from arango.exceptions import DocumentUpdateError, DocumentInsertError
-from typing import List, Tuple, Union
+from typing import List, Tuple
 from fastapi import Depends
 from pydantic import UUID4
 
@@ -23,7 +23,8 @@ class UserService:
         return UserWithCredentials(**user), None
 
     def create(self, user: UserModel) -> Tuple[UserWithCredentials, DocumentInsertError]:
-        new_user = UserWithCredentials(**user.dict(), password="")
+        # TODO: Create random password. Implement Change Password feature.
+        new_user = UserWithCredentials(**user.dict(), password="foobar")
         try:
             new_user = self.repo.insert(new_user.dict(by_alias=True))
         except DocumentInsertError as e:

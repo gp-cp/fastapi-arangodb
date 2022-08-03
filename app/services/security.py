@@ -1,9 +1,7 @@
 from datetime import timedelta, datetime
 from typing import Dict, Tuple
 from fastapi import Depends
-from jose import JWTError, jwt
-from app.models.user import UserWithCredentials
-
+from jose import  jwt
 from datetime import timezone
 from ..common.exceptions import AuthenticationError
 from ..common.settings import settings
@@ -23,7 +21,20 @@ class SecurityService:
         to_encode.update({"exp": expire})
         return jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
 
-    def login(self, auth_model: AuthModel) -> str:
+    def login(
+        self, auth_model: AuthModel
+    ) -> Tuple[str, timedelta, AuthenticationError]:
         user, e = self.user_service.find_by_user_name(auth_model.user_name)
+        # Check Credentials
+        if e or user.password != auth_model.password:
+            return None, None, AuthenticationError()
+
         access_token_expires = timedelta(minutes=120)
-        return self.__create_access_token(data={"sub": user.user_name, "rank": user.rank}, expires_delta=access_token_expires)
+        return (
+            self.__create_access_token(
+                data={"sub": user.user_name, "rank": user.rank},
+                expires_delta=access_token_expires,
+            ),
+            access_token_expires,
+            None,
+        )
